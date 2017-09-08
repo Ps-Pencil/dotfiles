@@ -1,0 +1,165 @@
+emacs*useXIM: false
+
+XTerm*faceName: Inconsolata
+xterm*faceSize: 13
+xterm*vt100*geometry: 80x60
+xterm*saveLines: 16384
+xterm*loginShell: true
+xterm*charClass: 33:48,35:48,37:48,43:48,45-47:48,64:48,95:48,126:48
+xterm*termName: xterm-256color
+xterm*eightBitInput: false
+XTerm.vt100.metaSendsEscape: true
+XTerm.vt100.backarrowKey: false
+XTerm.ttyModes: erase ^?
+
+
+! xolarized
+
+XTerm*background:            #1c1c1c
+XTerm*foreground:            #626262
+XTerm*fading:                40
+XTerm*fadeColor:             #1c1c1c
+XTerm*cursorColor:           #8a8a8a
+XTerm*pointerColorBackground:#585858
+XTerm*pointerColorForeground:#8a8a8a
+
+!! black dark/light
+XTerm*color0:                #262626
+XTerm*color8:                #1c1c1c
+
+!! red dark/light
+XTerm*color1:                #d70000
+XTerm*color9:                #d75f00
+
+!! green dark/light
+XTerm*color2:                #5f8700
+XTerm*color10:               #585858
+
+!! yellow dark/light
+XTerm*color3:                #af8700
+XTerm*color11:               #626262
+
+!! blue dark/light
+XTerm*color4:                #0087ff
+XTerm*color12:               #808080
+
+!! magenta dark/light
+XTerm*color5:                #af005f
+XTerm*color13:               #5f5faf
+
+!! cyan dark/light
+XTerm*color6:                #00afaf
+XTerm*color14:               #8a8a8a
+
+!! white dark/light
+XTerm*color7:                #e4e4e4
+XTerm*color15:               #ffffd7
+
+
+!-------------------------------------------------------------------------------
+! Xft settings
+!-------------------------------------------------------------------------------
+
+Xft.dpi:                    96
+Xft.antialias:              true
+Xft.rgba:                   rgb
+Xft.hinting:                true
+Xft.hintstyle:              hintslight
+
+!-------------------------------------------------------------------------------
+! URxvt settings
+! Colours lifted from Solarized (http://ethanschoonover.com/solarized)
+! More info at:
+! http://pod.tst.eu/http://cvs.schmorp.de/rxvt-unicode/doc/rxvt.1.pod
+!-------------------------------------------------------------------------------
+
+URxvt.depth:                32
+URxvt.geometry:             80x60
+URxvt.transparent:          false
+URxvt.fading:               0
+! URxvt.urgentOnBell:         true
+! URxvt.visualBell:           true
+URxvt.loginShell:           true
+URxvt.saveLines:            50
+URxvt.internalBorder:       3
+URxvt.lineSpace:            0
+URxvt.intensityStyles: false
+
+! Fonts
+URxvt.allow_bold:           false
+/* URxvt.font:                 -*-terminus-medium-r-normal-*-12-120-72-72-c-60-iso8859-1 */
+URxvt*font: xft:Consolas:size=12
+URxvt*boldFont: xft:Consolas:size=12
+
+! Fix font space
+URxvt*letterSpace: -1
+
+! Scrollbar
+URxvt.scrollStyle:          rxvt
+URxvt.scrollBar:            false
+
+! Perl extensions
+URxvt.perl-ext-common:      default,matcher,selection-to-clipboard
+URxvt.matcher.button:       1
+URxvt.urlLauncher:          google-chrome-stable
+
+! Cursor
+URxvt.cursorBlink:          true
+URxvt.cursorColor:          #657b83
+URxvt.cursorUnderline:      false
+
+! Pointer
+URxvt.pointerBlank:         true
+
+!!Source http://github.com/altercation/solarized
+
+*background: #002b36
+*foreground: #657b83
+!!*fading: 40
+*fadeColor: #002b36
+*cursorColor: #93a1a1
+*pointerColorBackground: #586e75
+*pointerColorForeground: #93a1a1
+
+!! black dark/light
+*color0: #073642
+*color8: #002b36
+
+!! red dark/light
+*color1: #dc322f
+*color9: #cb4b16
+
+!! green dark/light
+*color2: #859900
+*color10: #586e75
+
+!! yellow dark/light
+*color3: #b58900
+*color11: #657b83
+
+!! blue dark/light
+*color4: #268bd2
+*color12: #839496
+
+!! magenta dark/light
+*color5: #d33682
+*color13: #6c71c4
+
+!! cyan dark/light
+*color6: #2aa198
+*color14: #93a1a1
+
+!! white dark/light
+*color7: #eee8d5
+*color15: #fdf6e3
+
+! Keybindings
+XTerm*translations: #override \n\
+  Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
+  Ctrl Shift <Key>V: insert-selection(CLIPBOARD)
+
+URxvt.iso14755 : false
+
+URxvt.keysym.Shift-Control-V: eval:paste_clipboard
+URxvt.keysym.Shift-Control-C: eval:selection_to_clipboard
+
