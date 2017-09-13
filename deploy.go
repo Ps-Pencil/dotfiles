@@ -34,12 +34,13 @@ func cp(src, dst string) (err error) {
 	diffcmd := exec.Command("diff", src, dst)
 	cmd := exec.Command("cp", src, dst)
 	if sfi.IsDir() {
-		cmd = exec.Command("cp", "-r", src, dst)
+		cmd = exec.Command("rsync", "-a", src, dst)
 		diffcmd = exec.Command("diff", "-r", src, dst)
 	}
 
 	_, diff := diffcmd.CombinedOutput()
 	if diff == nil {
+		log.Printf("%s and %s are equal.\n", src, dst)
 		return nil
 	}
 
