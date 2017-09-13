@@ -1,3 +1,9 @@
 Xresources, ~/.Xresources
 tmux.conf, ~/.tmux.conf
 inputrc, ~/.inputrc
+vim, ~/.vim
+i3, ~/.i3
+dir_colors.d, ~/.dir_colors.d
+bashrc, ~/.bashrc
+bash_profile, ~/.bash_profile
+xinitrc, ~/.xinitrc
