@@ -25,18 +25,15 @@ var (
 // CopyFile copies a file from src to dst. If src and dst files exist, and are
 // the same, then return success. Otherise, attempt to create a hard link
 // between the two files. If that fail, copy the file contents from src to dst.
-func cp(src, dst string) (err error) {
-	sfi, err := os.Stat(src)
+func cp(src, dst string) error {
+	_, err := os.Stat(src)
 	if err != nil {
-		return
+		return err
 	}
 
 	diffcmd := exec.Command("diff", src, dst)
-	cmd := exec.Command("cp", src, dst)
-	if sfi.IsDir() {
-		cmd = exec.Command("rsync", "-a", src, dst)
-		diffcmd = exec.Command("diff", "-r", src, dst)
-	}
+	rmCmd := exec.Command("rm", "-r", dst)
+	cpCmd := exec.Command("cp", "-r", src, dst)
 
 	_, diff := diffcmd.CombinedOutput()
 	if diff == nil {
@@ -44,9 +41,11 @@ func cp(src, dst string) (err error) {
 		return nil
 	}
 
-	output, err := cmd.CombinedOutput()
-	if err != nil {
-		return fmt.Errorf("Error copying file: %q %s", output, err)
+	if output, err := rmCmd.CombinedOutput(); err != nil {
+		return fmt.Errorf("error removing: %q %s", output, err)
+	}
+	if output, err := cpCmd.CombinedOutput(); err != nil {
+		return fmt.Errorf("error copying: %q %s", output, err)
 	}
 	return nil
 }
