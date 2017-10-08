@@ -68,6 +68,8 @@ Plugin 'mileszs/ack.vim'
 Plugin 'lervag/vimtex'
 Plugin 'SirVer/ultisnips'
 
+Plugin 'tpope/vim-commentary'
+
 " Snippets are separated from the engine. Add this if you want them:
 Plugin 'honza/vim-snippets'
 
@@ -134,6 +136,7 @@ map <Leader>s :OverCommandLine<CR>
 
 " Saving file
 map <Leader>fs :w<CR>
+map <Leader>fS :w !sudo tee %<CR>l
 
 " Fast edit vimrc
 map <Leader>v :e ~/.vim/vimrc<CR>
@@ -224,3 +227,13 @@ let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden
     \ --ignore "**/*.pyc"
     \ --ignore .svn
     \ -g ""'
+
+" Vim needs to be built with Python scripting support, and must be
+" able to find Merlin's executable on PATH.
+if executable('ocamlmerlin') && has('python')
+  let s:ocamlmerlin = substitute(system('opam config var share'), '\n$', '', '''') . "/ocamlmerlin"
+  execute "set rtp+=".s:ocamlmerlin."/vim"
+  execute "set rtp+=".s:ocamlmerlin."/vimbufsync"
+endif
+
+autocmd FileType ocaml source substitute(system('opam config var share'), '\n$', '', '''') . "/typerex/ocp-indent/ocp-indent.vim"

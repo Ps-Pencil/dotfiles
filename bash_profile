@@ -34,4 +34,11 @@ else
     start_agent;
 fi
 
+# running this here instead of .xinitrc because .xinitrc is not sourced when system returns from hibernation.
+xset r rate 250 60 &
+xset b off
+
 export GOPATH=$HOME/go
+
+# OPAM configuration
+. /home/pspencil/.opam/opam-init/init.sh > /dev/null 2> /dev/null || true

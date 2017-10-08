@@ -7,3 +7,4 @@ dir_colors.d, ~/.dir_colors.d
 bashrc, ~/.bashrc
 bash_profile, ~/.bash_profile
 xinitrc, ~/.xinitrc
+tmux, ~/.tmux

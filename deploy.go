@@ -41,8 +41,10 @@ func cp(src, dst string) error {
 		return nil
 	}
 
-	if output, err := rmCmd.CombinedOutput(); err != nil {
-		return fmt.Errorf("error removing: %q %s", output, err)
+	if _, err := os.Stat(dst); err == nil {
+		if output, err := rmCmd.CombinedOutput(); err != nil {
+			return fmt.Errorf("error removing: %q %s", output, err)
+		}
 	}
 	if output, err := cpCmd.CombinedOutput(); err != nil {
 		return fmt.Errorf("error copying: %q %s", output, err)
