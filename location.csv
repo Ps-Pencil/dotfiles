@@ -8,3 +8,4 @@ bashrc, ~/.bashrc
 bash_profile, ~/.bash_profile
 xinitrc, ~/.xinitrc
 tmux, ~/.tmux
+vimrc, ~/.vimrc
