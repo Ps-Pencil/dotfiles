@@ -19,7 +19,9 @@ function start_agent {
     echo succeeded
     chmod 600 "${SSH_ENV}"
     . "${SSH_ENV}" > /dev/null
-    /usr/bin/ssh-add;
+    for f in $(ls ~/.ssh/*.pub); do
+        ssh-add "${f%.pub}";
+    done
 }
 
 # Source SSH settings, if applicable
