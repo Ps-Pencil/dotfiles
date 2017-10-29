@@ -1,4 +1,5 @@
 source ~/.vim/vimrc
+
 " sensible.vim - Defaults everyone can agree on
 " Maintainer:   Tim Pope <http://tpo.pe/>
 " Version:      1.1
@@ -124,8 +125,8 @@ for tool in s:opam_packages
   endif
 endfor
 " ## end of OPAM user-setup addition for vim / base ## keep this line
-" ## added by OPAM user-setup for vim / ocp-indent ## e3c3738d0b8342bb2830cbe3a5a47e03 ## you can edit, but keep this line
+" ## added by OPAM user-setup for vim / ocp-indent ## 62762ab855a2361bfbf4f68089690bef ## you can edit, but keep this line
 if count(s:opam_available_tools,"ocp-indent") == 0
-  source "/home/pspencil/.opam/system/share/vim/syntax/ocp-indent.vim"
+  source "/home/pspencil/.opam/4.05.0/share/vim/syntax/ocp-indent.vim"
 endif
 " ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line

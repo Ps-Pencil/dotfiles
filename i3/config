@@ -91,7 +91,7 @@ bindsym $mod+e layout toggle split
 bindsym $mod+Shift+space floating toggle
 
 # change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+# bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
@@ -167,6 +167,9 @@ mode "resize" {
 bindsym $mod+t exec i3-input -P "Switch to: " -F "exec ~/.i3/find_workspace --prefix='workspace ' --query=%s"
 bindsym $mod+Shift+t exec i3-input -P "Move to: " -F "exec ~/.i3/find_workspace --prefix='move container to workspace ' --query=%s"
 bindsym $mod+Control+t exec i3-input -P "Rename: " -F "rename workspace to %s"
+
+# toggle touchpad off
+bindsym $mod+space exec "~/.i3/toggle_touchpad" 
 
 bindsym $mod+Tab workspace back_and_forth
 # Start i3bar to display a workspace bar (plus the system information i3status

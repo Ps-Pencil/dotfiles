@@ -1,0 +1,10 @@
+#!/bin/bash
+
+current=$(synclient | grep Touchpad | tr -s ' ' | sed -e "s/^\W*//" | cut -d' ' -f 3)
+if [[ "$current" == "0" ]]; then
+    next="1"
+else
+    next="0"
+fi
+echo "TouchpadOff = $next"
+synclient TouchpadOff="$next"

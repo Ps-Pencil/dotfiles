@@ -47,7 +47,10 @@ Plugin 'osyo-manga/vim-over'
 Plugin 'fatih/vim-go'
 
 " CtrlP
-Plugin 'kien/ctrlp.vim'
+" Plugin 'kien/ctrlp.vim'
+"
+Plugin 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plugin 'junegunn/fzf.vim'
 
 " Automatically create directories
 Plugin 'pbrisbin/vim-mkdir'
@@ -60,6 +63,8 @@ Plugin 'nsf/gocode', {'rtp': 'vim/'}
 
 " YouCompleteMe
 Plugin 'Valloric/YouCompleteMe'
+
+Plugin 'majutsushi/tagbar'
 
 Plugin 'tpope/vim-surround'
 Plugin 'christoomey/vim-tmux-navigator'
@@ -74,6 +79,8 @@ Plugin 'tpope/vim-commentary'
 Plugin 'honza/vim-snippets'
 
 Plugin 'vim-syntastic/syntastic'
+
+Plugin 'jceb/vim-orgmode'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -127,7 +134,8 @@ cnoremap fd <c-c>
 
 " Leader key as space
 let mapleader = " "
-let maplocalleader = " "
+let maplocalleader = ","
+
 nnoremap <SPACE> <Nop>
 
 " NERDTree toggle
@@ -139,7 +147,7 @@ map <Leader>s :OverCommandLine<CR>
 " Saving file
 map <Leader>fs :w<CR>
 map <Leader>fS :w !sudo tee %<CR>l
-map <Leader>fr :CtrlPMRUFiles<CR>
+" map <Leader>fr :CtrlPMRUFiles<CR>
 
 " Fast edit vimrc
 map <Leader>v :e ~/.vim/vimrc<CR>
@@ -148,7 +156,7 @@ map <Leader>v :e ~/.vim/vimrc<CR>
 map <Leader><Tab> :e #<CR>
 
 " CtrlP
-let g:ctrlp_cmd = 'CtrlPMixed'
+" let g:ctrlp_cmd = 'CtrlPMixed'
 
 " goimports
 let g:go_fmt_command = "goimports"
@@ -196,9 +204,9 @@ let g:ycm_server_python_interpreter = '/usr/bin/python2'
 let g:airline_symbols_ascii = 1
 
 " CtrlP custom map
-let g:ctrlp_prompt_mappings = {
-			\ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>', 'fd'],
-			\ }
+" let g:ctrlp_prompt_mappings = {
+" 			\ 'PrtExit()':            ['<esc>', '<c-c>', '<c-g>', 'fd'],
+" 			\ }
 
 " tabwidth
 set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
@@ -221,27 +229,58 @@ let g:UltiSnipsExpandTrigger = "<c-n>"
 let g:UltiSnipsJumpForwardTrigger="<c-n>"
 let g:UltiSnipsJumpBackwardTrigger="<c-p>"
 
-nmap <c-b> :CtrlPBuffer<cr>
+nmap <c-b> :Buffers<cr>
+map <Leader>sb :Lines<cr>
+map <Leader>ss :BLines<cr>
 
-if executable('rg')
-  set grepprg=rg\ --color=never
-  let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
-  let g:ctrlp_use_caching = 0
-elseif executable('ag')
-    let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden 
-                \ --ignore .git
-                \ --ignore .hg
-                \ --ignore "**/*.pyc"
-                \ --ignore .svn
-                \ -g ""'
-endif
+" if executable('rg')
+"   set grepprg=rg\ --color=never
+"   let g:ctrlp_user_command = 'rg %s --files --color=never --glob ""'
+"   let g:ctrlp_use_caching = 0
+" elseif executable('ag')
+"     let g:ctrlp_user_command = 'ag %s -i --nocolor --nogroup --hidden 
+"                 \ --ignore .git
+"                 \ --ignore .hg
+"                 \ --ignore "**/*.pyc"
+"                 \ --ignore .svn
+"                 \ -g ""'
+" endif
+
+set grepprg=rg\ --vimgrep
 
 " syntastic config
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
+" Find using rg
+command! -bang -nargs=* Find call fzf#vim#grep('rg --column --line-number --no-heading --fixed-strings --ignore-case --no-ignore --hidden --follow --glob "!.git/*" --color "always" '.shellescape(<q-args>).'| tr -d "\017"', 1, <bang>0)
+map <Leader>sf :Find<cr>
+
+" First find a git repo. If not, fall back to Files.
+function! s:find_git_root()
+  return system('git rev-parse --show-toplevel 2> /dev/null')[:-2]
+endfunction
+
+command! ProjectFiles execute 'Files' s:find_git_root()
+
+" fzf
+map <c-p> :ProjectFiles<cr>
+
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
+
+" put swp files in vim
+set directory=$HOME/tmp/vimswap
+
+map <Leader>j :TagbarToggle<cr>
+
+" Jump to definition
+map <localleader>d :MerlinLocate<cr>
+
+let g:syntastic_ocaml_checkers = ['merlin']
+
+" No plaintex pls
+let g:tex_flavor = "latex"
