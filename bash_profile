@@ -4,7 +4,7 @@
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
-export PATH=$PATH:/bin:/opt/google/chrome/:~/go/bin
+export PATH=$PATH:/bin:/opt/google/chrome/:~/go/bin:~/matlab/bin
 
 if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ] \
     && [ -z "$TMUX" ]; then
@@ -57,6 +57,8 @@ export HISTFILESIZE=100000               # big big history
 
 export IGNORE_WINDOW_CHECK=1
 export UDM_PLAY_SOUND=1
-export LONG_RUNNING_IGNORE_LIST="man less emacs vim"
+export LONG_RUNNING_IGNORE_LIST="man less emacs vim gdb utop"
 
 alias e="emacsclient -c"
+
+export PATH=$PATH":~/bin"

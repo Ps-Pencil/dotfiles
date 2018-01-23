@@ -1,5 +1,3 @@
-source ~/.vim/vimrc
-
 " sensible.vim - Defaults everyone can agree on
 " Maintainer:   Tim Pope <http://tpo.pe/>
 " Version:      1.1
@@ -130,3 +128,10 @@ if count(s:opam_available_tools,"ocp-indent") == 0
   source "/home/pspencil/.opam/4.05.0/share/vim/syntax/ocp-indent.vim"
 endif
 " ## end of OPAM user-setup addition for vim / ocp-indent ## keep this line
+"
+if has('nvim')
+    source ~/.vim/vimrc.nvim
+else 
+    source ~/.vim/vimrc.vim
+endif
+
