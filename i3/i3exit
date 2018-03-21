@@ -41,10 +41,13 @@ case "$1" in
         i3-msg exit
         ;;
     suspend)
-        lock && systemctl suspend
+        # There's some memory leak at the present (2018-02-22)
+        # lock
+        systemctl suspend
         ;;
     hibernate)
-        lock && systemctl hibernate
+        # lock
+        systemctl hibernate
         ;;
     reboot)
         systemctl reboot

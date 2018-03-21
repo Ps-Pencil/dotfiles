@@ -3,23 +3,16 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+export PROMPT_COMMAND=''
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
-
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace
-
-# append to the history file, don't overwrite it
-shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
+
+# **/*
+shopt -s globstar
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -55,6 +48,15 @@ if [ "$color_prompt" = yes ]; then
 else
     PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
+
+# mess with undistract-me
+# if [ -z "$INSIDE_EMACS" ];
+# then
+#     export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"
+# else
+#     export PROMPT_COMMAND=''
+# fi
+
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
@@ -103,26 +105,11 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-eval "$(fasd --init auto)"
+# mess with undistract me
+# eval "$(fasd --init auto)"
 alias o='a -e xdg-open' # quick opening files with xdg-open
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
 shopt -s histappend                      # append to history, don't overwrite it
 
-source /etc/profile.d/undistract-me.sh
-
-PATH="/home/pspencil/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/pspencil/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/pspencil/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/pspencil/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/pspencil/perl5"; export PERL_MM_OPT;
-
-export ALTERNATE_EDITOR=""
-
-# --files: List files that would be searched but do not search
-# --no-ignore: Do not respect .gitignore, etc...
-# --hidden: Search hidden files and folders
-# --follow: Follow symlinks
-# --glob: Additional conditions for search (in this case ignore everything in the .git/ folder)
-export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'

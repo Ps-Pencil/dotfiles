@@ -169,7 +169,7 @@ bindsym $mod+Shift+t exec i3-input -P "Move to: " -F "exec ~/.i3/find_workspace 
 bindsym $mod+Control+t exec i3-input -P "Rename: " -F "rename workspace to %s"
 
 # toggle touchpad off
-bindsym $mod+space exec "~/.i3/toggle_touchpad" 
+bindsym $mod+space exec "~/.i3/toggle_touchpad"
 
 bindsym $mod+Tab workspace back_and_forth
 # Start i3bar to display a workspace bar (plus the system information i3status
@@ -180,7 +180,7 @@ bar {
 exec --no-startup-id nm-applet
 
 # change volume or toggle mute
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks 
+bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%- && pkill -RTMIN+1 i3blocks
 bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle && pkill -RTMIN+1 i3blocks
 
@@ -203,6 +203,13 @@ mode "$mode_system" {
 }
 bindsym $mod+Escape mode "$mode_system"
 
+# doesn't seem to work
+# exec --no-startup-id "i3-msg 'workspace 1:mail; append_layout /home/pspencil/.i3/workspace-1.json'"
+# exec --no-startup-id "i3-msg 'workspace 2:cal; append_layout /home/pspencil/.i3/workspace-2.json'"
+# exec --no-startup-id "i3-msg 'workspace 3:random; append_layout /home/pspencil/.i3/workspace-3.json'"
+# exec --no-startup-id "i3-msg 'workspace 4:project; append_layout /home/pspencil/.i3/workspace-4.json'"
+# exec --no-startup-id "i3-msg 'workspace 5:sup; append_layout /home/pspencil/.i3/workspace-5.json'"
+# exec --no-startup-id "i3-msg 'workspace 6:chat; append_layout /home/pspencil/.i3/workspace-6.json'"
 #######################################################################
 # automatically start i3-config-wizard to offer the user to create a
 # keysym-based config which used their favorite modifier (alt or windows)
